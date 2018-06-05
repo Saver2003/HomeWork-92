@@ -13,7 +13,6 @@ class App extends Component {
 
     this.websocket.onmessage = (message) => {
       const decodedDraw = JSON.parse(message.data);
-      console.log(decodedDraw);
 
       this.context = this.canvas.getContext('2d');
       this.imageData = this.context.createImageData(1, 1);
@@ -24,13 +23,11 @@ class App extends Component {
       this.d[2] = 50;
       this.d[3] = 255;
 
-
       decodedDraw.draw.forEach((array) => {
         this.context.putImageData(this.imageData, array.x, array.y);
       });
     }
   };
-
 
   canvasMouseMoveHandler = event => {
     if (this.state.mouseDown) {
@@ -69,7 +66,6 @@ class App extends Component {
     }));
     this.setState({mouseDown: false, pixelArray: []});
   };
-
 
   render() {
     return (

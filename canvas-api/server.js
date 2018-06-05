@@ -14,7 +14,6 @@ app.ws('/canvas', (ws, req) => {
   const id = req.get('sec-websocket-key');
   clients[id] = ws;
 
-  console.log('some');
   ws.send(JSON.stringify({type: 'NEW_DRAW', draw: pixelDraw}));
 
   ws.on('message', (draw) => {
@@ -30,7 +29,6 @@ app.ws('/canvas', (ws, req) => {
 
     switch (decodedDraw.type) {
       case 'CREATE_DRAW':
-        console.log(decodedDraw);
         pixelDraw = pixelDraw.concat(decodedDraw.draw);
         Object.values(clients).forEach(client => {
           client.send(JSON.stringify({
